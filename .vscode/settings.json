@@ -12,6 +12,6 @@
     "go.formatOnSave": true,
     "go.formatTool": "goreturns",
     "go.goroot": "c:\\go",
-    "go.gopath": "d:\\github\\go\\",
+    "go.gopath": "D:\\Dev\\sourcecode\\GITHUB\\go",
     "go.gocodeAutoBuild": true
 }
