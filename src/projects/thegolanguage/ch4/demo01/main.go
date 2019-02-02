@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"crypto/sha256"
+	"fmt"
 )
+
 /*
 	4.1. 数组
 	1.数组的长度是固定的
@@ -20,7 +21,7 @@ func main() {
 	fmt.Println(b[2]) // "0"
 	// 如果在数组的长度位置出现的是“...”省略号，则表示数组的长度是根据初始化值的个数来计算。
 	c := [...]int{1, 2, 3}
-	 d := [3]int{1, 2, 3}
+	d := [3]int{1, 2, 3}
 	// .数组定义时必须确定数组长度。一旦确定不允许改变
 	//d = [4]int{1, 2, 3, 4} // compile error: cannot assign [4]int to [3]int
 
@@ -46,16 +47,41 @@ func main() {
 
 	fmt.Printf("%d, %d, %d, %d, %s, %d, %d", a[0], b[0], c[0], d[0], e[0], f[0], j[0])
 
+	// 反转数组测试，[...] 定一固定长度的数组，长度由初始化时决定
+	arr := [...]int{1, 2, 3, 4, 5, 6, 7, 8}
+	fmt.Println(arr)
+	// 传入数组，这里时值传递，数组被复制为一个副本，
+	//reverseByCopy所做的只是修改副本本身，arr数组不会被改变
+	reverseByCopy(arr)
+	fmt.Println(arr)
 
+	reverseViaPointer(&arr)
+	fmt.Println(arr)
 }
-	/* 
+
+/*
 	调用一个函数时，函数的每个调用参数将会被赋值给函数内部的参数变量
 	所以函数参数变量接收的是一个复制的副本，并不是原始调用的变量，这样的
 	参数传递的机制导致传递大的数组类型将是低效的，参数传递的机制导致传递
 	大的数组类型将是低效的。
 
+	副本拷贝测试
+*/
+func reverseByCopy(s [8]int) {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+}
+
+func reverseViaPointer(s *[8]int) {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+}
+
+/*
 	我们可以显式地传入一个数组指针，那样的话函数通过指针对数组的任何修改都可以直接反馈到调用者。
-	*/
+*/
 
 func zero(ptr *[32]byte) {
 	// 给数组清零
@@ -65,11 +91,10 @@ func zero(ptr *[32]byte) {
 
 	// 等价于，数组字面值[32]byte{}就可以生成一个32字节的数组。
 	// 而且每个数组的元素都是零值初始化，也就是0
-	
+
 	// 给数组清零
 	*ptr = [32]byte{}
 }
-
 
 type Currency int
 
