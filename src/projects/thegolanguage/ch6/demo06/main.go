@@ -40,13 +40,13 @@ func main() {
 	fmt.Println("hello world")
 }
 
-func (b *Buffer) Grow(n int) {
-    if b.buf == nil {
-        b.buf = b.initial[:0] // use preallocated space initially
-    }
-    if len(b.buf)+n > cap(b.buf) {
-        buf := make([]byte, b.Len(), 2*cap(b.buf) + n)
-        copy(buf, b.buf)
-        b.buf = buf
-    }
-}
+// func (b *Buffer) Grow(n int) {
+//     if b.buf == nil {
+//         b.buf = b.initial[:0] // use preallocated space initially
+//     }
+//     if len(b.buf)+n > cap(b.buf) {
+//         buf := make([]byte, b.Len(), 2*cap(b.buf) + n)
+//         copy(buf, b.buf)
+//         b.buf = buf
+//     }
+// }
