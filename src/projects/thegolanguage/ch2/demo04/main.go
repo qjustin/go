@@ -10,6 +10,8 @@ var n = flag.Bool("n", false, "omit trailing newline")
 var sep = flag.String("s", " ", "separator")
 
 /*
+	2.3.2. 指针
+
 	指针特别有价值的地方在于我们可以不用名字而访问一个变量
 
 	变量: 一个变量对应一个保存了变量对应类型值的内存空间。

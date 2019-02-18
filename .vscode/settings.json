@@ -11,7 +11,9 @@
     "go.useCodeSnippetsOnFunctionSuggest": false,
     "go.formatOnSave": true,
     "go.formatTool": "goreturns",
-    "go.goroot": "/usr/local/go",
-    "go.gopath": "/Users/hujun/dev/sourcecode/github/go",
+    // "go.goroot": "/usr/local/go",
+    // "go.gopath": "/Users/hujun/dev/sourcecode/github/go",
+    "go.goroot": "C:/go",
+    "go.gopath": "D:/Dev/sourcecode/GITHUB/go",
     "go.gocodeAutoBuild": true
 }

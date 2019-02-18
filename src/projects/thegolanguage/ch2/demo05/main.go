@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 /*
-	new 函数
+	2.3.3. new函数
 	另一个创建变量的方法是调用内建的new函数。表达式new(T)将创建一个T类型的匿名变量，初始化为T类型的零值，然后返回变量地址，返回的指针类型为*T。
 */
 func main() {
