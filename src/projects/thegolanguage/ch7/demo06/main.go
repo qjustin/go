@@ -42,6 +42,11 @@ type Track struct {
 	Length time.Duration
 }
 
+/*
+	下面的变量tracks包含了一个播放列表。每个元素都不是Track本身而是指向它的指针。
+	尽管我们在下面的代码中直接存储Tracks也可以工作，sort函数会交换很多对元素，所
+	以如果每个元素都是指针而不是Track类型会更快，指针是一个机器字码长度而Track类型可能是八个或更多。
+*/
 var tracks = []*Track{
 	{"Go", "Delilah", "From the Roots Up", 2012, length("3m38s")},
 	{"Go", "Moby", "Moby", 1992, length("3m37s")},
@@ -57,8 +62,12 @@ func length(s string) time.Duration {
 	return d
 }
 
+/*
+	printTracks函数将播放列表打印成一个表格。
+*/
 func printTracks(tracks []*Track) {
 	const format = "%v\t%v\t%v\t%v\t%v\t\n"
+	// *tabwriter.Writer是满足io.Writer接口的。它会收集每一片写向它的数据；它的Flush方法会格式化整个表格并且将它写向os.Stdout
 	tw := new(tabwriter.Writer).Init(os.Stdout, 0, 8, 2, ' ', 0)
 	fmt.Fprintf(tw, format, "Title", "Artist", "Album", "Year", "Length")
 	fmt.Fprintf(tw, format, "-----", "------", "-----", "----", "------")
@@ -68,6 +77,9 @@ func printTracks(tracks []*Track) {
 	tw.Flush() // calculate column widths and print table
 }
 
+/*
+
+ */
 type byArtist []*Track
 
 func (x byArtist) Len() int           { return len(x) }
