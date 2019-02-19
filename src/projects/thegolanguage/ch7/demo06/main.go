@@ -23,7 +23,7 @@ import (
 	}
 */
 
-// demo01 -----------------------------------------------------------------------------
+// demo01
 // StringSlice 类型的底层数据结构是切片
 type StringSlice []string
 
@@ -32,7 +32,7 @@ func (p StringSlice) Len() int           { return len(p) }
 func (p StringSlice) Less(i, j int) bool { return p[i] < p[j] }
 func (p StringSlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
-// demo02 -----------------------------------------------------------------------------
+// demo02
 
 type Track struct {
 	Title  string
@@ -78,13 +78,32 @@ func printTracks(tracks []*Track) {
 }
 
 /*
-
- */
+	按照字段排序
+*/
 type byArtist []*Track
 
 func (x byArtist) Len() int           { return len(x) }
 func (x byArtist) Less(i, j int) bool { return x[i].Artist < x[j].Artist }
 func (x byArtist) Swap(i, j int)      { x[i], x[j] = x[j], x[i] }
+
+type byYear []*Track
+
+func (x byYear) Len() int           { return len(x) }
+func (x byYear) Less(i, j int) bool { return x[i].Year < x[j].Year }
+func (x byYear) Swap(i, j int)      { x[i], x[j] = x[j], x[i] }
+
+//
+/*
+	demo03 多字段排序
+*/
+type customSort struct {
+	t    []*Track
+	less func(x, y *Track) bool
+}
+
+func (x customSort) Len() int           { return len(x.t) }
+func (x customSort) Less(i, j int) bool { return x.less(x.t[i], x.t[j]) }
+func (x customSort) Swap(i, j int)      { x.t[i], x.t[j] = x.t[j], x.t[i] }
 
 func main() {
 	// demo01 -----------------------------------------------------------------------------
@@ -102,6 +121,39 @@ func main() {
 	for _, city := range cities {
 		fmt.Println(city)
 	}
+	fmt.Println()
 
 	// demo02 -----------------------------------------------------------------------------
+	sort.Sort(byArtist(tracks))
+	printTracks(tracks)
+	// sort包中提供了Reverse函数将排序顺序转换成逆序。sort.Reverse函数值得进行更近一步的学习，
+	// 因为它使用了（§6.3）章中的组合，这是一个重要的思路。
+	sort.Sort(sort.Reverse(byArtist(tracks)))
+	printTracks(tracks)
+	fmt.Println()
+
+	// demo03 -----------------------------------------------------------------------------
+	sort.Sort(customSort{tracks, func(x, y *Track) bool {
+		if x.Title != y.Title {
+			return x.Title < y.Title
+		}
+		if x.Year != y.Year {
+			return x.Year < y.Year
+		}
+		if x.Length != y.Length {
+			return x.Length < y.Length
+		}
+		return false
+	}})
+	printTracks(tracks)
+	fmt.Println()
+
+	values := []int{3, 1, 4, 1}
+	fmt.Println(sort.IntsAreSorted(values)) // "false"
+	sort.Ints(values)
+	fmt.Println(values)                     // "[1 1 3 4]"
+	fmt.Println(sort.IntsAreSorted(values)) // "true"
+	sort.Sort(sort.Reverse(sort.IntSlice(values)))
+	fmt.Println(values)                     // "[4 3 1 1]"
+	fmt.Println(sort.IntsAreSorted(values)) // "false"
 }
