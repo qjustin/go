@@ -15,5 +15,9 @@
     // "go.gopath": "/Users/hujun/dev/sourcecode/github/go",
     "go.goroot": "C:/go",
     "go.gopath": "D:/Dev/sourcecode/GITHUB/go",
-    "go.gocodeAutoBuild": true
+    "go.gocodeAutoBuild": true,
+    
+    "editor.fontSize": 14.5,
+    "editor.lineHeight": 17,
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
 }
