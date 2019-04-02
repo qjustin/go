@@ -2,15 +2,30 @@ package analyzer
 
 import (
 	"net/http"
+	"projects/crawler/component"
 )
 
-type Parser func(httpResp *http.Response, respDepth uint32) ([]Data, []error)
+type (
+	RespParser func(httpResp *http.Response, respDepth uint32) ([]Data, []error)
 
-type IAnalyzer interface {
-	IComponent
+	IAnalyzer interface {
+		component.IComponent
+		RespParsers() []RespParser
+		Analyze(resp *Response) ([]Data, []error)
+	}
 
-	GetParsers() []Parser
+	Analyzer struct {
+		component.Component
+		respParsers []RespParser
+	}
+)
+
+func (this *Analyzer) RespParsers() []RespParser {
+	parsers := make([]RespParser, len(this.respParsers))
+	copy(parsers, this.respParsers)
+	return parsers
 }
 
-type Analyzer struct {
+func (this *Analyzer) Analyze(resp *Response) ([]Data, []error) {
+
 }
