@@ -14,21 +14,21 @@ type Feed struct {
 	Type string `json:"type"`
 }
 
-// RetrieveFeeds reads and unmarshals the feed data file.
+// func 方法名(参数列表) (返回值1， 返回值2) {}
 func RetrieveFeeds() ([]*Feed, error) {
-	// Open the file.
+	// file指针，err
 	file, err := os.Open(dataFile)
 	if err != nil {
 		return nil, err
 	}
 
-	// Schedule the file to be closed once
-	// the function returns.
+	// defer 确保函数返回时才执行 类似finally
 	defer file.Close()
 
-	// Decode the file into a slice of pointers
-	// to Feed values.
+	// 切片的每一项时一个指向Feed类型值的指针
 	var feeds []*Feed
+	// decode 接收一个 interface{} 这个类型在go中很特殊，
+	// 一般会配合reflect包里提供的反射一起使用
 	err = json.NewDecoder(file).Decode(&feeds)
 
 	// We don't need to check for errors, the caller can do this.

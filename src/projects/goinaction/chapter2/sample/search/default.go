@@ -9,7 +9,8 @@ func init() {
 	Register("default", matcher)
 }
 
-// Search implements the behavior for the default matcher.
+// 方法声明为使用 defaultMatcher 类型的值作为接收者
+// 最佳实践：将方法的接收者声明为指针。
 func (m defaultMatcher) Search(feed *Feed, searchTerm string) ([]*Result, error) {
 	return nil, nil
 }
