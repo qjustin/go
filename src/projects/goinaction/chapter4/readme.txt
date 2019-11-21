@@ -1,4 +1,4 @@
-chapter04 -----------------------
+-------------------------- chapter04 数组
 
 var array [5]int  // 长度5初始化为0
 array := [5]int{10, 20, 30, 40, 50} // 使用字面量初始化数组
@@ -39,8 +39,25 @@ var array [1e6]int
 foo(&array)
 func foo(array *[1e6]int) {}
 
+-------------------------- chapter04 切片
+
 切片
 slice := make([]string, 5) // 长度和容量都是5的字符串切片
 slice := make([]int, 3, 5) // 长度3 容量5 int切片
 slice := []string{"Red", "Blue", "Green", "Yellow", "Pink"} // 长度和容量都是5的字符串切片
 slice := []int{10, 20, 30} // 长度和容量都是3的int切片
+slice := []string{99: ""} // 100个空字符串元素切片
+
+nil切片
+var slice []int // nil 整型切片，不做初始化。场景：返回切片，但发生异常时返回nil切片
+
+空切片
+slice := make([]int, 0) // 使用make创建空的整型切片
+slice := []int{} // 使用字面量创建空的整型切片
+
+计算切片长度和容量
+对于底层数组容量是k的切片slice[i:j]来说：
+长度：j - i
+容量：k - i
+
+基于同一个底层数组的不同切片，如果修改其中一个，同时会影响到下一个。
