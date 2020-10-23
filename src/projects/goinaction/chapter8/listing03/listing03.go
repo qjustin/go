@@ -1,4 +1,4 @@
-// This sample program demonstrates how to use the base log package.
+// This sample program demonstrates how to use the go log package.
 package main
 
 import (

@@ -92,7 +92,7 @@ func sToI() {
 	a, err := strconv.Atoi("123") // x is an int
 	// ParseInt函数的第三个参数是用于指定整型数的大小；例如16表示int16，0则表示int。
 	// 在任何情况下，返回的结果y总是int64类型，你可以通过强制类型转换将它转为更小的整数类型。
-	b, err := strconv.ParseInt("123", 10, 64) // base 10, up to 64 bits
+	b, err := strconv.ParseInt("123", 10, 64) // go 10, up to 64 bits
 
 	fmt.Printf("%s, %d, %d, %s", s, a, b, err)
 }
