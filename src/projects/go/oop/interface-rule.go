@@ -55,13 +55,13 @@ func main() {
 	//
 	//当一个函数接口 interface{} 空接口类型时，我们说它可以接收什么任意类型的参数（江湖上称之为无招胜有招）。
 	//当你使用这种写法时，Go 会默默地为我们做一件事，就是把传入函数的参数值（注意：Go 语言中的函数调用都是值传递的）的类型隐式的转换成 interface{} 类型。
-	a1 := 10
-
-	switch a1.(type) {
-	case int:
-		fmt.Println("参数的类型是 int")
-	case string:
-		fmt.Println("参数的类型是 string")
-	}
+	//a2 := 10
+	//
+	//switch a2.(type) {
+	//case int:
+	//	fmt.Println("参数的类型是 int")
+	//case string:
+	//	fmt.Println("参数的类型是 string")
+	//}
 }
 
